@@ -1,4 +1,5 @@
 <?php
+require "php.course/case_study/sanitizeName/sanitizeName.php";
 $dataset = [
     ["mario" , "Mario"],
     ["mAriO" , "Mario"],
