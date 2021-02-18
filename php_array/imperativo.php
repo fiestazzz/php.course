@@ -21,14 +21,22 @@
             return $item["name"];
         }
 
-       $names= array_map("extractName" , $persons);
-       print_r($names);
+       $names= [];
 
-       $marios=array_filter($persons , function ($person)
+       foreach ($persons as $person)
        {
-           return $person["surname"]=="Mario";
-       });
-       
+           $names[]=$person["name"];
+       }
+       //filtro 
+       $marios=[];
+       foreach ($persons as $person) {
+           if ($person["surname"]=="Mario")
+           {
+               array_push($marios,$person);
+           }
+       }
+
        print_r($marios);
+       
 
 ?>
