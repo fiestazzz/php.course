@@ -39,7 +39,7 @@ foreach ($dataset as $key => $row)
     else
    {
        echo "FAIL - test fallito linea: $linea \n";
-       var_dump($result);
+       //var_dump($result);
         
    }
 }
