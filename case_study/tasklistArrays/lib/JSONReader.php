@@ -11,6 +11,11 @@
         {
             $documento=file_get_contents($file_path);
             $res = json_decode($documento , true);
+            $codiceErrore=json_last_error();
+            if ($codiceErrore != JSON_ERROR_NONE)
+            {
+                throw new Exception('Syntax error' , 123);
+            }
         }
         else
         {

@@ -1,7 +1,13 @@
 <?php
 declare(strict_types=1);
+
 system("clear");
+
+echo testHeader(__FILE__);
+
 require "JSONReader.php";
+
+
 $dataset= 
 [
     [   
@@ -38,7 +44,7 @@ foreach($dataset as $row )
         $current=JSONReader($file_path);
     
     
-        if (isset($row['type']))
+        if (isset($row['error']))
         {
             $type=$row['type'];
             var_dump(gettype($current)=== $type);
