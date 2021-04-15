@@ -9,19 +9,17 @@
 
 </head>
 <body>
-    <pre>
-    <?php 
-    echo "REQUEST:";
-    echo $_SERVER['REQUEST_METHOD']."\n";
-
-    echo "POST\n";
-    print_r($_POST) ;
-
-    echo "GET\n";
-    print_r($_GET);
-    
+    <?php
+    require './src/entity/User.php';
+    require './src/model/UserModel.php'; 
+    if ($_SERVER['REQUEST_METHOD']=== 'POST')
+    {
+        //Posso controllare i dati e se sono giusti inserire il nuovo utente
+        $user=new User($_POST['firstName'],$_POST['lastName'],$_POST['email'],$_POST['dataNascita']);
+        $userModel = new UserModel();
+        $userModel->create($user);
+    }
     ?>
-    </pre>
     <header class="">
         USM(User-Managment-System)
     </header>
