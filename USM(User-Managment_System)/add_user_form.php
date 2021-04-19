@@ -1,3 +1,23 @@
+<?php
+if ($_SERVER['REQUEST_METHOD']==='POST')
+{
+    $user = UserFactory::fromArray($_POST);
+    $userValidation= new UserValidation($user);
+    $userValidation->validate();
+
+    if($userValidation->isValid())
+    {
+        $userModel = new UserModel();
+        $userModel->create($user);
+    }
+    $firstNameValidationResult=$userValidation->firstNameValid();
+
+}
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,17 +29,6 @@
 
 </head>
 <body>
-    <?php
-    require './src/entity/User.php';
-    require './src/model/UserModel.php'; 
-    if ($_SERVER['REQUEST_METHOD']=== 'POST')
-    {
-        //Posso controllare i dati e se sono giusti inserire il nuovo utente
-        $user=new User($_POST['firstName'],$_POST['lastName'],$_POST['email'],$_POST['dataNascita']);
-        $userModel = new UserModel();
-        $userModel->create($user);
-    }
-    ?>
     <header class="">
         USM(User-Managment-System)
     </header>

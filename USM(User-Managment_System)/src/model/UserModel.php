@@ -28,7 +28,6 @@ class UserModel
     {
         try {
             
-            var_dump($user);
             $pdoStm = $this->conn->prepare('Insert into User(firstName , lastName , email , dataNascita)
                                             values(:firstName,:lastName,:email,:dataNascita);');
             $pdoStm->bindValue(':firstName' , $user->getFirstName() , PDO::PARAM_STR);
