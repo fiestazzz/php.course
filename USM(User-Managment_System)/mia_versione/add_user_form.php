@@ -1,27 +1,28 @@
 <?php
-if ($_SERVER['REQUEST_METHOD'] ==='POST')
-{
-    $user = new User($_POST['firstName'],$_POST['lastName'],$_POST['email'],$_POST['dataNascita']);
-    $userValidation= new UserValidation($user);
-    $userValidation->validate();
-
-    if($userValidation->isValid())
-    {
-        $userModel = new UserModel();
-        $userModel->create($user);
-    }
-    $firstNameValidationResult=$userValidation->firstNameValidation();
-
-}
-
+require __DIR__.'/classes/User.php';
+require __DIR__.'/classes/Validatore.php';
 
 if ($_SERVER['REQUEST_METHOD'] ==='GET')
 {
     $firstName="";
     $lastName="";
     $email="";
+    $classeInput="";
+    $classeFeedback="";
+    $messaggio="";
+
 }
 
+if ($_SERVER['REQUEST_METHOD'] ==='POST')
+{
+    $utente = new User($_POST['firstName'],$_POST['lastName'],$_POST['email'],$_POST['dataNascita']);
+    $validazioneUtente = new Validatore($utente);
+    $firstName=$validazioneUtente->getUser()->getFirstName();
+    $classeInput=$validazioneUtente->getClasseBootstrapInputNome();
+    $classeFeedback=$validazioneUtente->getClasseBootstrapFeedbackNome();
+    $messaggio=$validazioneUtente->getMessaggioNome();
+
+}
 
 ?>
 
@@ -44,8 +45,9 @@ if ($_SERVER['REQUEST_METHOD'] ==='GET')
             <div class="form-group">
                 <label for="">Nome</label>
                  <!--is-invalid-->
-                <input class="form-control" type="text" name="firstName">
-                <div class="invalid-feedback">Nome obbligatorio</div>
+                <input class="form-control <?=$classeInput?>" type="text" name="firstName" value="<?= $firstName?>">
+                <div class="<?= $classeFeedback?>"> <?= $messaggio ?></div>
+                
             </div>
             <div class="form-group">
                 <label for="">Cognome</label>
