@@ -1,7 +1,7 @@
 <?php
-if ($_SERVER['REQUEST_METHOD']==='POST')
+if ($_SERVER['REQUEST_METHOD'] ==='POST')
 {
-    $user = UserFactory::fromArray($_POST);
+    $user = new User($_POST['firstName'],$_POST['lastName'],$_POST['email'],$_POST['dataNascita']);
     $userValidation= new UserValidation($user);
     $userValidation->validate();
 
@@ -10,10 +10,17 @@ if ($_SERVER['REQUEST_METHOD']==='POST')
         $userModel = new UserModel();
         $userModel->create($user);
     }
-    $firstNameValidationResult=$userValidation->firstNameValid();
+    $firstNameValidationResult=$userValidation->firstNameValidation();
 
 }
 
+
+if ($_SERVER['REQUEST_METHOD'] ==='GET')
+{
+    $firstName="";
+    $lastName="";
+    $email="";
+}
 
 
 ?>
