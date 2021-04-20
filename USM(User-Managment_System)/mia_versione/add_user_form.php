@@ -7,9 +7,12 @@ if ($_SERVER['REQUEST_METHOD'] ==='GET')
     $firstName="";
     $lastName="";
     $email="";
-    $classeInput="";
-    $classeFeedback="";
-    $messaggio="";
+    $classeInpuNome="";
+    $classeFeedbackNome="";
+    $messaggioNome="";
+    $classeInpuCognome="";
+    $classeFeedbackCognome="";
+    $messaggioCognome="";
 
 }
 
@@ -17,10 +20,16 @@ if ($_SERVER['REQUEST_METHOD'] ==='POST')
 {
     $utente = new User($_POST['firstName'],$_POST['lastName'],$_POST['email'],$_POST['dataNascita']);
     $validazioneUtente = new Validatore($utente);
+
     $firstName=$validazioneUtente->getUser()->getFirstName();
-    $classeInput=$validazioneUtente->getClasseBootstrapInputNome();
-    $classeFeedback=$validazioneUtente->getClasseBootstrapFeedbackNome();
-    $messaggio=$validazioneUtente->getMessaggioNome();
+    $classeInputNome=$validazioneUtente->getClasseBootstrapInputNome();
+    $classeFeedbackNome=$validazioneUtente->getClasseBootstrapFeedbackNome();
+    $messaggioNome=$validazioneUtente->getMessaggioNome();
+
+    $lastName=$validazioneUtente->getUser()->getLastName();
+    $classeInputCognome=$validazioneUtente->getClasseBootstrapInputCognome();
+    $classeFeedbackCognome=$validazioneUtente->getClasseBootstrapFeedbackCognome();
+    $messaggioCognome=$validazioneUtente->getMessaggioCognome();
 
 }
 
@@ -45,14 +54,14 @@ if ($_SERVER['REQUEST_METHOD'] ==='POST')
             <div class="form-group">
                 <label for="">Nome</label>
                  <!--is-invalid-->
-                <input class="form-control <?=$classeInput?>" type="text" name="firstName" value="<?= $firstName?>">
-                <div class="<?= $classeFeedback?>"> <?= $messaggio ?></div>
+                <input class="form-control <?=$classeInputNome?>" type="text" name="firstName" value="<?= $firstName?>">
+                <div class="<?= $classeFeedbackNome?>"> <?= $messaggioNome ?></div>
                 
             </div>
             <div class="form-group">
                 <label for="">Cognome</label>
-                <input class="form-control" type="text" name="lastName">
-                <div class="invalid-feedback">Cognome obbligatorio</div>
+                <input class="form-control <?=$classeInputCognome?>" type="text" name="lastName" value="<?= $lastName?>">
+                <div class="<?= $classeFeedbackCognome?>"><?= $messaggioCognome ?></div>
             </div>
             <div class="form-group">
                 <label for="">Email</label>
