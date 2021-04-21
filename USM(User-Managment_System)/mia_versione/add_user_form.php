@@ -1,18 +1,27 @@
 <?php
 require __DIR__.'/classes/User.php';
 require __DIR__.'/classes/Validatore.php';
+require __DIR__.'/classes/Sanitize.php';
+
+
 
 if ($_SERVER['REQUEST_METHOD'] ==='GET')
 {
     $firstName="";
     $lastName="";
     $email="";
+
     $classeInpuNome="";
     $classeFeedbackNome="";
     $messaggioNome="";
+
     $classeInpuCognome="";
     $classeFeedbackCognome="";
     $messaggioCognome="";
+
+    $classeInpuEmail="";
+    $classeFeedbackEmail="";
+    $messaggioEmail="";
 
 }
 
@@ -22,6 +31,8 @@ if ($_SERVER['REQUEST_METHOD'] ==='POST')
     $validazioneUtente = new Validatore($utente);
 
     $firstName=$validazioneUtente->getUser()->getFirstName();
+    /*$firstName=new Sanitize($firstName);
+    $firstName=$firstName->getParola();*/
     $classeInputNome=$validazioneUtente->getClasseBootstrapInputNome();
     $classeFeedbackNome=$validazioneUtente->getClasseBootstrapFeedbackNome();
     $messaggioNome=$validazioneUtente->getMessaggioNome();
@@ -30,6 +41,11 @@ if ($_SERVER['REQUEST_METHOD'] ==='POST')
     $classeInputCognome=$validazioneUtente->getClasseBootstrapInputCognome();
     $classeFeedbackCognome=$validazioneUtente->getClasseBootstrapFeedbackCognome();
     $messaggioCognome=$validazioneUtente->getMessaggioCognome();
+
+    $email=$validazioneUtente->getUser()->getEmail();
+    $classeInputEmail=$validazioneUtente->getClasseBootstrapInputEmail();
+    $classeFeedbackEmail=$validazioneUtente->getClasseBootstrapFeedbackEmail();
+    $messaggioEmail=$validazioneUtente->getMessaggioEmail();
 
 }
 
@@ -65,8 +81,8 @@ if ($_SERVER['REQUEST_METHOD'] ==='POST')
             </div>
             <div class="form-group">
                 <label for="">Email</label>
-                <input class="form-control" type="text" name="email">
-                <div class="invalid-feedback">Email obbligatoria</div>
+                <input class="form-control <?=$classeInputEmail?>" type="text" name="email" value="<?= $email?>">
+                <div class="<?= $classeFeedbackEmail?>"><?= $messaggioEmail ?></div>
             </div>
             <div class="form-group">
                 <label for="">Data Nascita</label>

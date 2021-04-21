@@ -18,6 +18,11 @@ class Validatore
     private $classeBootstrapInputCognome;
     private $classeBootstrapFeedbackCognome;
 
+    private $classeBootstrapInputEmail;
+    private $classeBootstrapFeedbackEmail;
+
+    
+
     public function __construct(User $user) {
         $this->user=$user;
         $this->validatore();
@@ -42,6 +47,7 @@ class Validatore
             $this->classeBootstrapInputNome="is-invalid";
             $this->classeBootstrapFeedbackNome="invalid-feedback";
         }
+        
         $this->validatoreCognome();
         if($this->controlloCognome === true)
         {
@@ -56,7 +62,23 @@ class Validatore
             $this->classeBootstrapInputCognome="is-invalid";
             $this->classeBootstrapFeedbackCognome="invalid-feedback";
         }
+
+        $this->validatoreEmail();
+        if ($this->controlloEmail === true)
+        {
+            $this->messaggioEmail ="Email Valida";
+            $this->classeBootstrapInputEmail="is-valid";
+            $this->classeBootstrapFeedbackEmail="valid-feedback";
+        }
+        else
+        {
+            
+            $this->messaggioEmail ="Email Obbligatoria/Non valida";
+            $this->classeBootstrapInputEmail="is-invalid";
+            $this->classeBootstrapFeedbackEmail="invalid-feedback";
+        }
     }
+
 
     public function validatoreNome()
     {
@@ -70,6 +92,7 @@ class Validatore
         }
     }
 
+
     public function validatoreCognome()
     {
         if(trim($this->user->getLastName() !== ""))
@@ -81,6 +104,7 @@ class Validatore
             $this->controlloCognome=false;
         }
     }
+
 
     public function validatoreEmail()
     {
@@ -190,6 +214,22 @@ class Validatore
     public function getClasseBootstrapFeedbackCognome()
     {
         return $this->classeBootstrapFeedbackCognome;
+    }
+
+    /**
+     * Get the value of classeBootstrapInputEmail
+     */ 
+    public function getClasseBootstrapInputEmail()
+    {
+        return $this->classeBootstrapInputEmail;
+    }
+
+    /**
+     * Get the value of classeBootstrapFeedbackEmail
+     */ 
+    public function getClasseBootstrapFeedbackEmail()
+    {
+        return $this->classeBootstrapFeedbackEmail;
     }
 }
 
