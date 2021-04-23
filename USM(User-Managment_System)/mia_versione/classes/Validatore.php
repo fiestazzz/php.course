@@ -7,10 +7,12 @@ class Validatore
     private $controlloNome;
     private $controlloCognome;
     private $controlloEmail;
+    private $controlloDataNascita;
 
     private $messaggioNome;
     private $messaggioCognome;
     private $messaggioEmail;
+    private $messaggioDataNascita;
 
     private $classeBootstrapInputNome;
     private $classeBootstrapFeedbackNome;
@@ -20,6 +22,11 @@ class Validatore
 
     private $classeBootstrapInputEmail;
     private $classeBootstrapFeedbackEmail;
+
+    private $classeBootstrapInputData;
+    private $classeBootstrapFeedbackData;
+
+    
 
     
 
@@ -77,6 +84,22 @@ class Validatore
             $this->classeBootstrapInputEmail="is-invalid";
             $this->classeBootstrapFeedbackEmail="invalid-feedback";
         }
+
+
+        $this->validatoreData();
+        if($this->controlloDataNascita === true)
+        {
+            $this->messaggioDataNascita ="Data Valida";
+            $this->classeBootstrapInputData="is-valid";
+            $this->classeBootstrapFeedbackData="valid-feedback";
+        }
+        else
+        {
+            $this->messaggioDataNascita ="Data obbligatoria";
+            $this->classeBootstrapInputData="is-invalid";
+            $this->classeBootstrapFeedbackData="invalid-feedback";
+        }
+
     }
 
 
@@ -118,6 +141,19 @@ class Validatore
         else
         {
             $this->controlloEmail=false;
+        }
+    }
+
+
+    public function validatoreData()
+    {
+        if($this->user->getDataNascita() !== "")
+        {
+            $this->controlloDataNascita = true;
+        }
+        else
+        {
+            $this->controlloDataNascita=false;
         }
     }
 
@@ -230,6 +266,38 @@ class Validatore
     public function getClasseBootstrapFeedbackEmail()
     {
         return $this->classeBootstrapFeedbackEmail;
+    }
+
+    /**
+     * Get the value of controlloDataNascita
+     */ 
+    public function getControlloDataNascita()
+    {
+        return $this->controlloDataNascita;
+    }
+
+    /**
+     * Get the value of classeBootstrapInputData
+     */ 
+    public function getClasseBootstrapInputData()
+    {
+        return $this->classeBootstrapInputData;
+    }
+
+    /**
+     * Get the value of classeBootstrapFeedbackData
+     */ 
+    public function getClasseBootstrapFeedbackData()
+    {
+        return $this->classeBootstrapFeedbackData;
+    }
+
+    /**
+     * Get the value of messaggioDataNascita
+     */ 
+    public function getMessaggioDataNascita()
+    {
+        return $this->messaggioDataNascita;
     }
 }
 

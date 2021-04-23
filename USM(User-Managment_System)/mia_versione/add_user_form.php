@@ -10,6 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] ==='GET')
     $firstName="";
     $lastName="";
     $email="";
+    $data="";
 
     $classeInpuNome="";
     $classeFeedbackNome="";
@@ -22,6 +23,10 @@ if ($_SERVER['REQUEST_METHOD'] ==='GET')
     $classeInpuEmail="";
     $classeFeedbackEmail="";
     $messaggioEmail="";
+
+    $classeInpuData="";
+    $classeFeedbackData="";
+    $messaggioData="";
 
 }
 
@@ -46,6 +51,11 @@ if ($_SERVER['REQUEST_METHOD'] ==='POST')
     $classeInputEmail=$validazioneUtente->getClasseBootstrapInputEmail();
     $classeFeedbackEmail=$validazioneUtente->getClasseBootstrapFeedbackEmail();
     $messaggioEmail=$validazioneUtente->getMessaggioEmail();
+
+    $data=$validazioneUtente->getUser()->getDataNascita();
+    $classeInputData=$validazioneUtente->getClasseBootstrapInputData();
+    $classeFeedbackData=$validazioneUtente->getClasseBootstrapFeedbackData();
+    $messaggioData=$validazioneUtente->getMessaggioDataNascita();
 
 }
 
@@ -86,8 +96,8 @@ if ($_SERVER['REQUEST_METHOD'] ==='POST')
             </div>
             <div class="form-group">
                 <label for="">Data Nascita</label>
-                <input class="form-control" type="date" name="dataNascita">
-                <div class="invalid-feedback">Data obbligatoria</div>
+                <input class="form-control <?=$classeInputData?>" type="date" name="dataNascita" value="<?= $data?>">
+                <div class="<?=$classeFeedbackData?>"><?= $messaggioData ?></div>
             </div>
 
             <button class="btn btn-primary mt-3" type="submit">Aggiungi</button>
