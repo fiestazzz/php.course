@@ -6,7 +6,7 @@ class UserValidation
     public const FIRST_NAME_ERROR_REQUIRED_MSG = 'Il nome e\' obbligatorio' ;
 
     private $user;
-    private $error=[];
+    private $errors=[];
     private $isValid=true;
 
 
@@ -34,7 +34,7 @@ class UserValidation
         $firstName=trim($this->user->getFirstName());
         if (empty($firstName))
         {
-            $validationResult= new ValidationResult(self::FIRST_NAME_ERROR_REQUIRED_MSG ,false , $firstName);
+            $validationResult= new ValidationResult(self::FIRST_NAME_ERROR_REQUIRED_MSG , false , $firstName);
         }
         else
         {

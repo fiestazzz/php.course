@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] ==='POST')
     $userValidation= new UserValidation($user);
     $firstNameValidation  = $userValidation->getError('firstName');
     $Nomevalido=$firstNameValidation->getIsValid() ? "is-valid":"is-invalid";
-    $messagevalido=$firstNameValidation->getMessage() ? "valid-feedback": "invalid-feedback";
+    $messagevalido=$firstNameValidation->getIsValid() ? "valid-feedback": "invalid-feedback";
     $valido=$firstNameValidation->getIsValid();
     $message=$firstNameValidation->getMessage();
 
