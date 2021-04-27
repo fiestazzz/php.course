@@ -1,17 +1,22 @@
 <?php
+
+use salvatorebotta\usm\entity\User;
+use salvatorebotta\usm\validator\bootstrap\ValidationFormHelper;
+use salvatorebotta\usm\validator\UserValidation;
+
 require __DIR__.'/vendor/testTools/testTool.php';
 require __DIR__.'/src/entity/User.php';
 require __DIR__.'/src/validator/UserValidation.php';
 require __DIR__.'/src/validator/ValidationResult.php';
+require __DIR__.'/src/validator/bootstrap/ValidationFormHelper.php';
 
 
 if ($_SERVER['REQUEST_METHOD'] ==='GET')
 {
-    $firstName="";
-    $lastName="";
-    $email="";
-    $valido="";
-    $message="";
+    list($valueNome , $formControlClassNome , $classMessageNome , $messageNome)=ValidationFormHelper::getDefaultValue();
+    list($valueCognome, $formControlClassCognome , $classMessageCognome , $messageCognome)=ValidationFormHelper::getDefaultValue();
+
+    
     
 }
 
@@ -20,20 +25,21 @@ if ($_SERVER['REQUEST_METHOD'] ==='POST')
 {
     $user = new User($_POST['firstName'],$_POST['lastName'],$_POST['email'],$_POST['dataNascita']);
     $userValidation= new UserValidation($user);
-    $firstNameValidation  = $userValidation->getError('firstName');
-    $Nomevalido=$firstNameValidation->getIsValid() ? "is-valid":"is-invalid";
-    $messagevalido=$firstNameValidation->getIsValid() ? "valid-feedback": "invalid-feedback";
-    $valido=$firstNameValidation->getIsValid();
-    $message=$firstNameValidation->getMessage();
+    $firstNameValidation = $userValidation->getError('firstName');
+    $lastNameValidation=$userValidation->getError('lastName');
 
-    $firstName = $user->getFirstName();
+    list($valueNome , $formControlClassNome , $classMessageNome , $messageNome)=ValidationFormHelper::getValidationClass($firstNameValidation);
+    list($valueCognome, $formControlClassCognome , $classMessageCognome , $messageCognome)=ValidationFormHelper::getValidationClass($lastNameValidation);
+    list($valueNEmail , $formControlClassEmail , $classMessageEmail , $messageEmail)=ValidationFormHelper::getValidationClass($firstNameValidation);
+   //list($valueNome , $formControlClassNome , $classMessageNome , $messageNome)=ValidationFormHelper::getValidationClass($firstNameValidation);
+
+    
+
+    
     
 
 
 }
-
-
-
 
 
 ?>
@@ -57,14 +63,14 @@ if ($_SERVER['REQUEST_METHOD'] ==='POST')
             <div class="form-group">
                 <label for="">Nome</label>
                  <!--is-invalid-->
-                <input class="form-control <?=$Nomevalido ?>" type="text" name="firstName" value= "<?= $firstName ?>">
-                <div class="<?= $messagevalido ?>"><?= $message ?></div>
+                <input class="form-control <?=$formControlClassNome ?>" type="text" name="firstName" value= "<?= $valueNome ?>">
+                <div class="<?= $classMessageNome ?>"><?= $messageNome ?></div>
                 
             </div>
             <div class="form-group">
                 <label for="">Cognome</label>
-                <input class="form-control" type="text" name="lastName">
-                <div class="invalid-feedback">Cognome obbligatorio</div>
+                <input class="form-control <?=$formControlClassCognome ?>" type="text" name="lastName"  value="<?= $valueCognome ?>">
+                <div class="<?= $classMessageCognome ?>"><?= $messageCognome ?></div>
             </div>
             <div class="form-group">
                 <label for="">Email</label>

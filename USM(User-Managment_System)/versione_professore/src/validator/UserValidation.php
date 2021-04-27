@@ -1,9 +1,21 @@
 <?php
+namespace salvatorebotta\usm\validator;
+
+use salvatorebotta\usm\entity\User;
+
+
 
 class UserValidation
 {
     public const FIRST_NAME_ERROR_NONE_MSG = 'Il nome e\' corretto' ;
     public const FIRST_NAME_ERROR_REQUIRED_MSG = 'Il nome e\' obbligatorio' ;
+
+    public const LAST_NAME_ERROR_NONE_MSG = 'Il cognome e\' corretto' ;
+    public const LAST_NAME_ERROR_REQUIRED_MSG = 'Il cognome e\' obbligatorio' ;
+
+    public const EMAIL_ERROR_NONE_MSG = 'L\'email e\' corretta' ;
+    public const EMAIL_ERROR_REQUIRED_MSG = 'L\'email e\' obbligatoria' ;
+    public const EMAIL_ERROR_INVALID = 'L\'email e\' invalida';
 
     private $user;
     private $errors=[];
@@ -27,6 +39,13 @@ class UserValidation
         {
             $this->isValid = false;
         }
+        
+        $result = $this->validateLastName();
+        $this->errors['lastName']=$result;
+        if (!$result->getIsValid())
+        {
+            $this->isValid = false;
+        }
     }
 
     private function validateFirstName()
@@ -39,6 +58,20 @@ class UserValidation
         else
         {
             $validationResult= new ValidationResult(self::FIRST_NAME_ERROR_NONE_MSG , true ,$firstName );
+        }
+        return $validationResult;
+    }
+
+    private function validateLastName()
+    {
+        $lastName=trim($this->user->getLastName());
+        if (empty($lastName))
+        {
+            $validationResult= new ValidationResult(self::LAST_NAME_ERROR_REQUIRED_MSG , false , $lastName);
+        }
+        else
+        {
+            $validationResult= new ValidationResult(self::LAST_NAME_ERROR_NONE_MSG , true ,$lastName );
         }
         return $validationResult;
     }

@@ -1,4 +1,9 @@
 <?php
+namespace salvatorebotta\usm\model;
+
+use salvatorebotta\usm\entity\User;
+use \PDO;
+
 class UserModel
 {
     private $conn;

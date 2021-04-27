@@ -1,5 +1,5 @@
 <?php
-
+namespace salvatorebotta\usm\validator;
 class ValidationResult
 {
     private $message;
