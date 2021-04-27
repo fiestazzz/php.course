@@ -87,6 +87,13 @@ class UserValidation
     }
 
 
+    public function getIsValid(){
+        $this->isValid = true;
+        foreach ($this->errors as $validationResult) {
+            $this->isValid = $this->isValid && $validationResult->getIsValid();
+        }
+        return $this->isValid;
+    }
 
 
 }

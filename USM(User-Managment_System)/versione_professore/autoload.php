@@ -1,7 +1,5 @@
 <?php
 
-use salvatorebotta\usm\entity\User;
-
 spl_autoload_register(function($className)
 {
     $classPath = str_replace("salvatorebotta\usm" , __DIR__."\src" , $className);
@@ -10,5 +8,8 @@ spl_autoload_register(function($className)
     require $classPath;
     
 });
+
+
+
 
 ?>

@@ -1,14 +1,12 @@
 <?php
 
 use salvatorebotta\usm\entity\User;
+use salvatorebotta\usm\model\UserModel;
 use salvatorebotta\usm\validator\bootstrap\ValidationFormHelper;
 use salvatorebotta\usm\validator\UserValidation;
 
-require __DIR__.'/vendor/testTools/testTool.php';
-require __DIR__.'/src/entity/User.php';
-require __DIR__.'/src/validator/UserValidation.php';
-require __DIR__.'/src/validator/ValidationResult.php';
-require __DIR__.'/src/validator/bootstrap/ValidationFormHelper.php';
+require 'autoload.php';
+
 
 
 if ($_SERVER['REQUEST_METHOD'] ==='GET')
@@ -30,10 +28,15 @@ if ($_SERVER['REQUEST_METHOD'] ==='POST')
 
     list($valueNome , $formControlClassNome , $classMessageNome , $messageNome)=ValidationFormHelper::getValidationClass($firstNameValidation);
     list($valueCognome, $formControlClassCognome , $classMessageCognome , $messageCognome)=ValidationFormHelper::getValidationClass($lastNameValidation);
-    list($valueNEmail , $formControlClassEmail , $classMessageEmail , $messageEmail)=ValidationFormHelper::getValidationClass($firstNameValidation);
+    list($valueEmail , $formControlClassEmail , $classMessageEmail , $messageEmail)=ValidationFormHelper::getValidationClass($firstNameValidation);
    //list($valueNome , $formControlClassNome , $classMessageNome , $messageNome)=ValidationFormHelper::getValidationClass($firstNameValidation);
 
-    
+    if ($userValidation->getIsValid())
+    {
+        $userModel = new UserModel();
+        $userModel->create($user);
+        header('location:./list_users.php');
+    }
 
     
     
