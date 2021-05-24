@@ -47,6 +47,7 @@ if ($_SERVER['REQUEST_METHOD']==='POST') {
 
     if ($val->getIsValid()) {
         // TODO
+        
         $userModel = new UserModel();
         $userModel->create($user);
         header('location: ./list_users.php');

@@ -1,6 +1,7 @@
 
-
+<div class="form-group">
 <label for="">Interessi Utente</label>
+</div>
 <?php foreach ($listInteressi as $value) {?>
     <div class="form-check">
   <input class="form-check-input" type="checkbox" value="" id="<?= $value->getInteresseId()?>">
