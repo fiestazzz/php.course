@@ -6,7 +6,7 @@ use sarassoroberto\usm\entity\User;
 
 class UserValidation {
 
-    public const FIRST_NAME_ERROR_NONE_MSG = 'Il nome è ggiusto !!';
+    public const FIRST_NAME_ERROR_NONE_MSG = 'Il nome è giusto !!';
     public const FIRST_NAME_ERROR_REQUIRED_MSG = 'Il nome è obbligatorio';
 
     public const LAST_NAME_ERROR_NONE_MSG = 'Il cognome è ggiusto !!';

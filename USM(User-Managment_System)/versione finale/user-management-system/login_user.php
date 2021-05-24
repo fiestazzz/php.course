@@ -1,6 +1,7 @@
 <?php
 use sarassoroberto\usm\entity\User;
 use sarassoroberto\usm\model\UserModel;
+use sarassoroberto\usm\service\UserSession;
 use sarassoroberto\usm\validator\bootstrap\ValidationFormHelper;
 use sarassoroberto\usm\validator\UserValidation;
 
@@ -21,8 +22,8 @@ if ($_SERVER['REQUEST_METHOD']==='POST') {
     $email=$_POST['email']; 
     $password = $_POST['password'];
     
-    $userModel = new UserModel();
-    if($userModel->authenticate($email , $password)){
+    $userSession = new UserSession();
+    if($userSession->authenticate($email , $password)){
     header('location: ./list_users.php');
     }
     else{
