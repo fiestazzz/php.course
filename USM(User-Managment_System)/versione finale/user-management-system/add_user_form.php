@@ -1,5 +1,6 @@
 <?php 
 use sarassoroberto\usm\entity\User;
+use sarassoroberto\usm\model\InteresseModel;
 use sarassoroberto\usm\model\UserModel;
 use sarassoroberto\usm\validator\bootstrap\ValidationFormHelper;
 use sarassoroberto\usm\validator\UserValidation;
@@ -11,6 +12,10 @@ require "./__autoload.php";
 $action = './add_user_form.php';
 $submit = 'aggiungi nuovo utente';
 
+
+$Interessi = new InteresseModel();
+$listInteressi = $Interessi->readAll();
+
 if($_SERVER['REQUEST_METHOD'] ==='GET'){
     
     /** Il form viene compilato "vuoto" */
@@ -20,8 +25,6 @@ if($_SERVER['REQUEST_METHOD'] ==='GET'){
     list($birthday,$birthdayClass,$birthdayClassMessage,$birthdayMessage) = ValidationFormHelper::getDefault(); 
     list($password, $passwordClass, $passwordClassMessage, $passwordMessage) = ValidationFormHelper::getDefault();
     
-    $userInteresse = new $UserInteresse();
-    $userInteresseAll = $userInteresse -> readAll();
 }
 
 if ($_SERVER['REQUEST_METHOD']==='POST') {

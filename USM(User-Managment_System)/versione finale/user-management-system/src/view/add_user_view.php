@@ -74,15 +74,9 @@
                <label class="d-block text-bold">id dell'utente che sto modificando</label>
                <input type="text" name="userId" value="<?= $userId ?>" class="form-control">
              </div>
+             <?php }?>
 
-            
-
-             <?php foreach ($userInteresseAll as  $value) { ?>
-                <div class="form-group">
-                  <button type="radio"> <?=$value?></button>
-                </div>
-             <?php  }  ?>
-             
+             <?php  include './src/view/interesse_view.php' ?>
              
              <button class="btn btn-primary mt-3" type="submit"><?= $submit ?></button>
         </form>

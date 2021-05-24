@@ -3,6 +3,7 @@ namespace sarassoroberto\usm\model;
 
 use PDO;
 use sarassoroberto\usm\config\local\AppConfig;
+use sarassoroberto\usm\entity\Interesse;
 
 class InteresseModel{
 
@@ -18,9 +19,9 @@ class InteresseModel{
     }
 
     public function readAll(){
-        $pdostm = $this->conn->prepare('SELECT Name FROM Interesse;');
+        $pdostm = $this->conn->prepare('SELECT * FROM Interesse;');
         $pdostm->execute();
-        return $pdostm->fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE);
+        return $pdostm->fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE , Interesse::class,['','']);
     }
 
     
