@@ -11,14 +11,17 @@ require "./__autoload.php";
 $action = './add_user_form.php';
 $submit = 'aggiungi nuovo utente';
 
-if($_SERVER['REQUEST_METHOD']==='GET'){
+if($_SERVER['REQUEST_METHOD'] ==='GET'){
     
     /** Il form viene compilato "vuoto" */
     list($firstName,$firstNameClass,$firstNameClassMessage,$firstNameMessage) = ValidationFormHelper::getDefault();
     list($lastName,$lastNameClass,$lastNameClassMessage,$lastNameMessage) = ValidationFormHelper::getDefault();
     list($email,$emailClass,$emailClassMessage,$emailMessage) = ValidationFormHelper::getDefault();
     list($birthday,$birthdayClass,$birthdayClassMessage,$birthdayMessage) = ValidationFormHelper::getDefault(); 
-    list($password, $passwordClass, $passwordClassMessage, $passwordMessage) = ValidationFormHelper::getDefault();   
+    list($password, $passwordClass, $passwordClassMessage, $passwordMessage) = ValidationFormHelper::getDefault();
+    
+    $userInteresse = new $UserInteresse();
+    $userInteresseAll = $userInteresse -> readAll();
 }
 
 if ($_SERVER['REQUEST_METHOD']==='POST') {
