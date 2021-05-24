@@ -5,6 +5,7 @@
 <div class="container">
 <div class="border p-3 my-3">
 <a class="btn btn-primary" href="./add_user_form.php">add new user</a>
+<a class="btn btn-primary" href="./../../logout.php">Logout</a>
 </div>
 <table class="table">
     <tr>

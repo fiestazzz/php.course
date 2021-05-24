@@ -37,6 +37,10 @@ class UserSession{
 
     }
 
+    function logOut(){
+        unset($_SESSION['user_authenticated']);
+    }
+    
     function redirect(){
         if(!$this->isAuthenticated()){
             header("location: /../../login_user.php");
