@@ -3,11 +3,13 @@ use sarassoroberto\usm\entity\User;
 use sarassoroberto\usm\model\InteresseModel;
 use sarassoroberto\usm\model\UserInteresseModel;
 use sarassoroberto\usm\model\UserModel;
+use sarassoroberto\usm\service\UserSession;
 use sarassoroberto\usm\validator\bootstrap\ValidationFormHelper;
 use sarassoroberto\usm\validator\UserValidation;
 
 //ini_set('memory_limit','16');
 require "./__autoload.php";
+(new UserSession())->redirect();
 
 /** $action rappresentà l'indirizzo a cui verranno inviati i dati del form */
 $action = './add_user_form.php';

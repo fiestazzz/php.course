@@ -1,11 +1,13 @@
 <?php 
 use sarassoroberto\usm\entity\User;
 use sarassoroberto\usm\model\UserModel;
+use sarassoroberto\usm\service\UserSession;
 use sarassoroberto\usm\validator\bootstrap\ValidationFormHelper;
 use sarassoroberto\usm\validator\UserValidation;
 
 require "./__autoload.php";
 
+(new UserSession())->redirect();
 /** $action rappresentà l'indirizzo a cui verranno inviati i dati del form */
 $action = './edit_user.php';
 $submit = 'salva modifiche';

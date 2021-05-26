@@ -1,8 +1,11 @@
 <?php
 
 use sarassoroberto\usm\model\UserModel;
+use sarassoroberto\usm\service\UserSession;
 
 require "./__autoload.php";
+
+(new UserSession())->redirect();
 
 $userId = filter_input(INPUT_GET,'user_id',FILTER_SANITIZE_NUMBER_INT);
 

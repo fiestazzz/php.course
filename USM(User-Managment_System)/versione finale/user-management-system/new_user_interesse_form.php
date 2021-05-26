@@ -2,7 +2,9 @@
  include './__autoload.php';
 
 use sarassoroberto\usm\model\InteresseModel;
+use sarassoroberto\usm\service\UserSession;
 
+(new UserSession())->redirect();
 $submit = 'Crea';
  $action = './new_user_interesse_form.php';
 

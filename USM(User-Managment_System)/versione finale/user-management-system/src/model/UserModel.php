@@ -140,4 +140,18 @@ class UserModel
         }
        
     }
+
+    public function readUserInteresse($userId){
+        try {
+            $sql = 'select * from user_interesse where UserId=:userId';
+            $pdostm = $this->conn->prepare($sql);
+            $pdostm->bindValue(':userId',$userId,PDO::PARAM_INT);
+            $pdostm->execute();
+            $result = $pdostm->fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE,UserInteresseModel::class,['','']);
+            return count($result) === 0 ? null : $result[0];
+        } catch (\Throwable $th) {
+            echo "qualcosa è andato storto";
+            echo " ". $th->getMessage();
+        }
+    }
 }

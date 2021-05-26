@@ -1,9 +1,10 @@
 <?php
 
 use sarassoroberto\usm\model\InteresseModel;
+use sarassoroberto\usm\service\UserSession;
 
 include './__autoload.php';
-
+(new UserSession())->redirect();
 
 $submit = "Elimina";
 $action = "./delete_interesse_from_form.php";

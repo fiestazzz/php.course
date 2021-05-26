@@ -13,6 +13,7 @@ class UserInteresseModel{
     {
         $this->userId = $userId;
         $this->interesseId = $interesseId;
+       
     }
 
 
@@ -30,12 +31,8 @@ class UserInteresseModel{
             // TODO: togliere echo
             echo "codice di errore".$e->getCode();
         }
-
-       
-
-
     }
-    
+
 
     /**
      * Get the value of userId
