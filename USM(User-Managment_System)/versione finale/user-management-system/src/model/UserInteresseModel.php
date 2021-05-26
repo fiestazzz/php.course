@@ -1,4 +1,9 @@
 <?php
+namespace sarassoroberto\usm\model;
+
+use PDO;
+use sarassoroberto\usm\config\local\AppConfig;
+
 class UserInteresseModel{
     private $userId;
     private $interesseId;
@@ -15,10 +20,20 @@ class UserInteresseModel{
         try {
             $this->conn = new PDO('mysql:dbname='.AppConfig::DB_NAME.';host='.AppConfig::DB_HOST, AppConfig::DB_USER, AppConfig::DB_PASSWORD);
             $this->conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+            $pdostm = $this->conn->prepare('INSERT INTO user_interesse (UserId,InteresseId)
+            VALUES (:UserId,:InteresseId);');
+            $pdostm->bindValue(':UserId', $this->getUserId(), PDO::PARAM_INT);
+            $pdostm->bindValue(':InteresseId', $this->getInteresseId(), PDO::PARAM_INT);
+    
+             $pdostm->execute();
         } catch (\PDOException $e) {
             // TODO: togliere echo
-            echo $e->getMessage();
+            echo "codice di errore".$e->getCode();
         }
+
+       
+
+
     }
     
 

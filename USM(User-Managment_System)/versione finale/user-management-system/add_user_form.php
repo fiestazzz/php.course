@@ -1,6 +1,7 @@
 <?php 
 use sarassoroberto\usm\entity\User;
 use sarassoroberto\usm\model\InteresseModel;
+use sarassoroberto\usm\model\UserInteresseModel;
 use sarassoroberto\usm\model\UserModel;
 use sarassoroberto\usm\validator\bootstrap\ValidationFormHelper;
 use sarassoroberto\usm\validator\UserValidation;
@@ -29,6 +30,8 @@ if($_SERVER['REQUEST_METHOD'] ==='GET'){
 
 if ($_SERVER['REQUEST_METHOD']==='POST') {
 
+    $idInteresse = $_POST["idInteresse"];
+    print_r($_POST);
     $user = new User($_POST['firstName'], $_POST['lastName'], $_POST['email'], $_POST['birthday'] , $_POST['password']);
     $val = new UserValidation($user);
     $firstNameValidation = $val->getError('firstName');
@@ -50,6 +53,9 @@ if ($_SERVER['REQUEST_METHOD']==='POST') {
         
         $userModel = new UserModel();
         $userModel->create($user);
+        $userJustCreated = $userModel->readByEmail($user->getEmail());
+        $UserInteresseModel = new UserInteresseModel($userJustCreated->getUserId() ,$idInteresse);
+        $UserInteresseModel->associateUserToHobbies();
         header('location: ./list_users.php');
     }
 }
