@@ -12,6 +12,8 @@ require "./__autoload.php";
 /** $action rappresentà l'indirizzo a cui verranno inviati i dati del form */
 $action = './add_user_form.php';
 $submit = 'aggiungi nuovo utente';
+$aggiungiInteresse = "./new_user_interesse_form.php";
+$eliminaInteresse = "./delete_interesse_from_form.php";
 
 
 $Interessi = new InteresseModel();
@@ -31,7 +33,6 @@ if($_SERVER['REQUEST_METHOD'] ==='GET'){
 if ($_SERVER['REQUEST_METHOD']==='POST') {
 
     $idInteresse = $_POST["idInteresse"];
-    print_r($_POST);
     $user = new User($_POST['firstName'], $_POST['lastName'], $_POST['email'], $_POST['birthday'] , $_POST['password']);
     $val = new UserValidation($user);
     $firstNameValidation = $val->getError('firstName');

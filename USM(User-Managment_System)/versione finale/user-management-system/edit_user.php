@@ -33,9 +33,6 @@ if ($_SERVER['REQUEST_METHOD']==='POST') {
     $user = new User($_POST['firstName'], $_POST['lastName'], $_POST['email'], $_POST['birthday'] , $_POST['password']);
     // Imposto anche l'id che deve corrispondere a quello dell'utente che sto modificando
     $user->setUserId($userId);
-
-    print_r($user);
-    //die();
     $val = new UserValidation($user);
     
     $firstNameValidation = $val->getError('firstName');

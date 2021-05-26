@@ -24,6 +24,44 @@ class InteresseModel{
         return $pdostm->fetchAll(PDO::FETCH_CLASS|PDO::FETCH_PROPS_LATE , Interesse::class,['','']);
     }
 
+
+    public function createInteresse($nameInteresse){
+        try {
+            $pdostm = $this->conn->prepare('INSERT INTO Interesse (Name)
+            VALUES (:Name);');
+
+            $pdostm->bindValue(':Name', $nameInteresse, PDO::PARAM_STR);
+            
+
+            $pdostm->execute();
+        } catch (\PDOException $e) {
+            // TODO: Evitare echo
+            echo $e->getMessage();
+
+        }
+    }
+
+    public function deleteInteresse($interesseId){
+        try {
+            $sql = "delete from Interesse where InteresseId=:user_id ";
+        
+            $pdostm = $this->conn->prepare($sql);
+            $pdostm->bindValue(':user_id',$interesseId,PDO::PARAM_INT);
+            $pdostm->execute();
+    
+            
+            if($pdostm->rowCount() === 0) {
+                return false;
+            } else if($pdostm->rowCount() === 1){
+                return true;
+            }
+        } catch (\PDOException $e) {
+            // TODO: Evitare echo
+            echo $e->getMessage();
+
+        }
+    }
+
     
 
 }

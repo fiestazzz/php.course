@@ -79,8 +79,17 @@
              <?php  include './src/view/interesse_view.php' ?>
              
              <button class="btn btn-primary mt-3" type="submit"><?= $submit ?></button>
+             <a class ="btn btn-primary mt-3" href="<?=$aggiungiInteresse?>">Aggiugi Interesse</a>
+             <a class ="btn btn-primary mt-3" href="<?=$eliminaInteresse?>">Elimina Interesse</a>
         </form>
     </div>
     
 </body>
 </html>
+
+
+
+
+
+
+
